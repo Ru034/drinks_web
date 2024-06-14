@@ -18,7 +18,7 @@ $(document).ready(function () {
                     console.log('註冊成功');
                     setTimeout(() => {
                         console.log('註冊成功');
-                        window.location.href = '/pages/login.html';
+                        window.location.href = './login.html';
                     }, 2000);
                 }
             },
