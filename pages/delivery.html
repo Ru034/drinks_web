@@ -7,10 +7,9 @@
   <title>外送</title>
 </head>
 
-
 <body>
-    <!-- 檢查是否有 user cookie，有的話顯示使用者帳號，否則跳轉到登入頁面 -->
-    
+  <!-- 檢查是否有 user cookie，有的話顯示使用者帳號，否則跳轉到登入頁面 -->
+
   <div class="top-nav">
     <div class="user-account"></div>
     <a href="login.html">
@@ -22,9 +21,15 @@
     <a href="delivery.html">外送</a>
   </div>
 
-
   <div class="login-window"></div>
-
+  <div class="shopping-cart">
+    <h2>購物車</h2>
+    <ul class="cart-items">
+      <!-- 這裡將動態顯示購物車內容 -->
+    </ul>
+    <button onclick="checkout()">結帳</button>
+  </div>
+  <div class="drinks-list"></div> <!-- 用來顯示飲品列表的容器 -->
 
   <script>
     // 檢查用戶是否已登入，並顯示用戶帳號
@@ -53,10 +58,58 @@
     // 當文檔加載完成後執行檢查
     document.addEventListener('DOMContentLoaded', function () {
       checkLogin();
+      fetchDrinks();
     });
+
+    // 獲取飲品列表的函數
+    function fetchDrinks() {
+      fetch('../php/delivery.php')
+        .then(response => response.text())
+        .then(data => {
+          document.querySelector('.drinks-list').innerHTML = data;
+        });
+    }
+    let cart = [];
+
+    function updateSweetness(drinkId) {
+      let sweetness = document.getElementById('sweetness_select_' + drinkId).value;
+      document.getElementById('sweetness_' + drinkId).value = sweetness;
+    }
+
+    function updateIce(drinkId) {
+      let ice = document.getElementById('ice_select_' + drinkId).value;
+      document.getElementById('ice_' + drinkId).value = ice;
+    }
+
+    function addToCart(drinkId) {
+      let item = {
+        drinkId: drinkId,
+        sweetness: document.getElementById('sweetness_' + drinkId).value,
+        ice: document.getElementById('ice_' + drinkId).value
+      };
+
+      cart.push(item);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      let cartItems = document.querySelector('.cart-items');
+      cartItems.innerHTML = '';
+      cart.forEach(item => {
+        let listItem = document.createElement('li');
+        listItem.textContent = `飲品名: ${item.drinkName}, 甜度: ${item.sweetness}, 冰塊: ${item.ice}`;
+        cartItems.appendChild(listItem);
+      });
+    }
+
+    function checkout() {
+      // 在這裡處理結帳的相關邏輯，可以將購物車內容送到後端處理
+      console.log('購物車內容:', cart);
+      // 可以使用 fetch 或者其他方式將 cart 資料送到後端 PHP 處理
+    }
+
+
   </script>
-
-
 </body>
 
 </html>

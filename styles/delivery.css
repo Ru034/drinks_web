@@ -1,35 +1,37 @@
 .login-window {
-  padding: 20px 0px 30px 0px; 
+  padding: 10px 0px 15px 0px; 
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #04AA6D;
   text-align: center;
   flex-direction: column;
-  border-radius: 30px;
-  margin: 40px 10px 60px 10px; 
+  border-radius: 20px;
+  margin: 20px 10px 30px 10px; 
   background: rgba(128, 128, 128, 0.3);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 80vw;
-  max-width: 80vh;
-  min-width: 300px;
-  margin: 60px auto;
+  width: 200px; /* Set a fixed width for the login window */
+  height: 50px; /* Set a fixed height for the login window */
+  font-size: 24px; /* Increase the font size for better readability */
+  margin: 30px auto; /* Center the login window horizontally */
 }
 
 .login-form h1 {
   text-align: center;
   color: white;
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .login-form p {
-  font-size: 24px;
+  font-size: 18px;
   text-align: center;
   color: white;
 }
+
+
 
 
 /*home的*/
@@ -125,3 +127,53 @@ body {
   background-color: #04AA6D;
   color: white;
 }
+.drinks-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.drink-item {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.drink-item img {
+  width: 20px;
+  height: 20px;
+}
+
+.drink-item h2 {
+  font-size: 20px;
+}
+
+.drink-item p {
+  margin: 5px 0;
+}
+
+.drink-item form {
+  margin-top: 10px;
+}
+.drink-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.drink-item {
+  /* 如果有需要，可以為每個商品單獨定義樣式 */
+}
+
+.drink-item form {
+  margin-top: 10px;
+}
+
+fieldset {
+  margin-bottom: 10px;
+}
+
+
