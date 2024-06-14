@@ -80,6 +80,7 @@
       let ice = document.getElementById('ice_select_' + drinkId).value;
       document.getElementById('ice_' + drinkId).value = ice;
     }
+    
 
     function addToCart(drinkId) {
       let item = {
@@ -97,7 +98,7 @@
       cartItems.innerHTML = '';
       cart.forEach(item => {
         let listItem = document.createElement('li');
-        listItem.textContent = `飲品名: ${item.drinkName}, 甜度: ${item.sweetness}, 冰塊: ${item.ice}`;
+        listItem.textContent = `飲品名: ${item.drinkId}, 甜度: ${item.sweetness}, 冰塊: ${item.ice}`;
         cartItems.appendChild(listItem);
       });
     }
