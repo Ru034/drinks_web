@@ -1,0 +1,127 @@
+.login-window {
+  padding: 20px 0px 30px 0px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #04AA6D;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 30px;
+  margin: 40px 10px 60px 10px; 
+  background: rgba(128, 128, 128, 0.3);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80vw;
+  max-width: 80vh;
+  min-width: 300px;
+  margin: 60px auto;
+}
+
+.login-form h1 {
+  text-align: center;
+  color: white;
+  font-size: 48px;
+}
+
+.login-form p {
+  font-size: 24px;
+  text-align: center;
+  color: white;
+}
+
+
+/*home的*/
+* {
+  box-sizing: border-box;
+}
+
+/*滾動條(右邊的那個滾輪)的部分*/
+/*我直接抄chatGPT的*/
+::-webkit-scrollbar {
+  width: 12px;
+  /* 滾動條寬度*/
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #686868;
+  ;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #424242;
+}
+
+* {
+  scrollbar-color: #545454 #2d2d2d;
+  /*滾輪的背景顏色 與滾輪顏色*/
+}
+
+
+/*加了這個就可以用到100% 好像跟margin有關*/
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-image: url(../images/shop_ps過_羽化.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.top-nav {
+  display: flex;
+  height: 75px;
+  width: 100dvw;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0px;
+  z-index: 5;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(128, 128, 128, 0.3);
+  background-blend-mode: luminosity;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0px 30px;
+}
+
+.top-nav a {
+  color: white;
+  text-align: center;
+  padding: 1dvh 2dvw;
+  /*上下 左右*/
+  text-decoration: none;
+  font-size: 14pt;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.top-nav a:hover {
+  color: black;
+
+  background: linear-gradient(0deg, rgba(208, 208, 208, 0.5), rgba(208, 208, 208, 0.5)),
+    rgba(0, 0, 0, 0.1);
+  background-blend-mode: color-burn,
+    luminosity;
+
+  box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3),
+    inset 0px -0.5px 1px rgba(255, 255, 255, 0.25),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.08),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.top-nav a.active {
+  background-color: #04AA6D;
+  color: white;
+}

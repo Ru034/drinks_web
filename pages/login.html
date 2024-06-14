@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../styles/login.css" rel="stylesheet">
+  <script src="../js/jquery-3.7.1.min.js"></script>
+  <title>外送</title>
+</head>
+
+<body>
+  <div class="top-nav">
+    <a href="login.html">
+      <img src="../images/login.png" alt="登入圖示" style="width:50px; height:50px;">
+    </a>
+    <a href="home.html">首頁</a>
+    <a href="most_new.html">最新資訊</a>
+    <a href="drinks.html">飲品介紹</a>
+    <a href="delivery.html">外送</a>
+  </div>
+  <div class="login-window">
+    <div class="login-form">
+      <h1>歡迎！</h1>
+      <p>登入或註冊</p>
+      <!-- 使用 form 標籤來包含輸入元素 -->
+      <form id="login-form">
+        <div class="account">
+          <input type="text" id="account" placeholder="帳號" name="account">
+        </div>
+        <div class="password">
+          <input type="password" id="password" placeholder="密碼" name="password">
+        </div>
+        <div class="btn-login">
+          <button type="submit" id="login-btn">登入</button>
+        </div>
+      </form>
+      <div class="btn-register">
+        <button id="register-btn">註冊</button>
+      </div>
+      <div id="message" class="message"></div>
+    </div>
+  </div>
+
+
+  <script>
+  $(document).ready(function() {
+    $('#login-btn').click(function(event) {
+      event.preventDefault();  // 防止表單的標準提交
+
+      // 收集表單資料
+      var account = $('#account').val();
+      var password = $('#password').val();
+
+      // 進行 AJAX 請求
+      $.ajax({
+        url: '../php/login.php',  // 目標服務器的 URL
+        type: 'POST',
+        data: {
+          'account': account.toString(),
+          'password': password.toString()
+        },
+        dataType: 'json',  // 期望從服務器返回的數據類型
+        success: function(data) {
+          console.log(data);
+          if (data.success) {
+            //document.cookie = 'loggedin=true; path=/;';
+            
+            $('#message').text('登入成功，正在跳轉...').removeClass('error').addClass('success');
+            setTimeout(function() {
+              window.location.href = 'home.html';
+            }, 2000);
+          } else {
+            $('#message').text(data.message).removeClass('success').addClass('error');
+          }
+        },
+        error: function(xhr, status, error) {
+          $('#message').text('網路或服務器錯誤').removeClass('success').addClass('error');
+          console.error('Error:', error);
+        }
+      });
+    });
+
+    $('#register-btn').click(function() {
+      window.location.href = 'register.html';
+    });
+  });
+</script>
+
+
+</body>

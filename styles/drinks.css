@@ -1,0 +1,303 @@
+/* 
+當前問題:
+第一排品項會被最上方的瀏覽行(top nav)擋到 
+*/
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* 浮動視窗的樣式 */
+.drift {
+  display: none;
+  position: fixed;
+  z-index: 1000; /* 層級高一點確保在最上層 */
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 通常用黑色半透明做遮罩 */
+  transition: all 2.0s; /* 平滑出現效果 */
+}
+
+.drift-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中心對齊內容 */
+  justify-content: space-around; /* 均勻分配空間 */
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(220, 225, 235, 0.9));
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+              0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: auto; /* 自動調整寬度 */
+  max-width: 600px; /* 最大寬度設定 */
+  animation: slideIn 2.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+/* 圖片樣式 */
+#modalImage {
+  width: 60%; /* 調整圖寬片度 */
+  border-radius: 10px; /* 圓角效果 */
+  margin-bottom: 20px; /* 與下方內容的間距 */
+}
+
+/* 文字內容樣式 */
+#modalName, #modalPrice, #modalDescription {
+  width: 100%;
+  text-align: center; /* 文字中心對齊 */
+  margin: 10px 0; /* 增加上下間距 */
+  font-family: 'Arial', sans-serif; /* 使用無襯線字體 */
+}
+
+#modalName {
+  font-size: 24px; /* 標題字體大小 */
+  font-weight: bold; /* 加粗 */
+}
+
+#modalPrice {
+  font-size: 20px;
+  color: #338a36; /* 價格顏色 */
+}
+
+#modalDescription {
+  font-size: 16px; /* 描述文字大小 */
+}
+
+/* 平滑滑入動畫 */
+@keyframes slideIn {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* 響應式設計：在小屏幕裝置上適應 */
+@media screen and (max-width: 768px) {
+  .drift-content {
+    width: 80%; /* 在小屏幕上寬度較大 */
+  }
+}
+/* 到這 */
+
+
+div.gallery {
+  border-radius: 20px;
+  transition: 0.3s;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(128, 128, 128, 0.3);
+  background-blend-mode: luminosity;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 0;
+  padding: 12px;
+}
+
+div.gallery:hover {
+  scale: 1.15;
+  transition: 0.5s;
+  z-index: 3;
+
+  background: linear-gradient(0deg, rgba(208, 208, 208, 0.5), rgba(208, 208, 208, 0.5)),
+    rgba(0, 0, 0, 0.1);
+  background-blend-mode: color-burn,
+    luminosity;
+
+  box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3),
+    inset 0px -0.5px 1px rgba(255, 255, 255, 0.25),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.08),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+
+.responsive {
+  padding: 12px;
+  float: left;
+  width: 25%;
+}
+
+.introduce {
+  padding: 120px 30px;
+  max-width: 150dvh; /*??*/
+  margin: auto;
+}
+
+
+
+
+/* ----------------home的---------------------- */
+* {
+  box-sizing: border-box;
+}
+
+/*滾動條(右邊的那個滾輪)的部分*/
+/*我直接抄chatGPT的*/
+::-webkit-scrollbar {
+  width: 12px;
+  /* 滾動條寬度*/
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #686868;
+  ;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #424242;
+}
+
+* {
+  scrollbar-color: #545454 #2d2d2d;
+  /* 滚动条拖动手柄和轨道的颜色 */
+}
+
+
+/*加了這個就可以用到100% 好像跟margin有關*/
+
+body {
+  margin: 0px;
+  background-color: rgba(0, 0, 0, 0.9);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.top-nav {
+  display: flex;
+  height: 75px;
+  width: 100dvw;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  top: 0px;
+  z-index: 5;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(128, 128, 128, 0.3);
+  background-blend-mode: luminosity;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0px 30px;
+}
+
+.top-nav a {
+  color: white;
+  text-align: center;
+  padding: 1dvh 2dvw;
+  /*上下 左右*/
+  text-decoration: none;
+  font-size: 14pt;
+  font-weight: bold;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.top-nav a:hover {
+  color: black;
+
+  background: linear-gradient(0deg, rgba(208, 208, 208, 0.5), rgba(208, 208, 208, 0.5)),
+    rgba(0, 0, 0, 0.1);
+  background-blend-mode: color-burn,
+    luminosity;
+
+  box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3),
+    inset 0px -0.5px 1px rgba(255, 255, 255, 0.25),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.08),
+    inset 0px 1.5px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.top-nav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/*drink有articlea嗎?*/
+.article {
+  margin: auto;
+  padding: 20px;
+  font-size: 20px;
+  line-height: 2;
+  /* 設置行高為文字大小的2倍 */
+  text-align: center;
+  background-color: black;
+  color: white;
+  background-image: url("../images/free_background_5.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 150dvh;
+  /*filter: brightness(20%);*/
+  /*亮度調暗一點 讓焦點著重於文字*/
+}
+
+
+/*以下是投影片的東東*/
+.slide-show-container {
+  position: relative;
+  width: 100%;
+  max-width: 150dvh;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slide-show img {
+  height: 100%;
+  width: 100%;
+  padding-top: 75px;
+}
+
+@keyframes fade-effect {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade {
+  animation: fade-effect 5s ease-in-out forwards;
+}
+
+
+/* 最底下 */
+.footer {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.icon {
+  width: 100px;
+  width: 100px
+}

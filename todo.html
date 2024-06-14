@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link href="../styles/delivery.css" rel="stylesheet">
+  <title>外送</title>
+</head>
+
+<body>
+  <ul>
+    <li>飲品介紹
+      <ul>
+        <li>使用SQL讀取飲品資料庫，並顯示在網頁上</li>
+        <li>點擊飲品後，網頁顯示飲品資料（使用浮動視窗，不跳頁面）</li>
+        <li>(管理員)可以新增、修改、刪除飲品資料</li>
+      </ul>
+    </li>
+    <li>登入介面
+      <ul>
+        <li>改成左上角的Icon按鈕</li>
+        <li>使用者可以登入、註冊</li>
+        <li>可以更改資料</li>
+      </ul>
+    </li>
+    <li>外送介面
+      <ul>
+        <li>使用者可以訂餐</li>
+        <li>在還沒登入的時候會跳到登入介面</li>
+        <li>模仿飲品介紹的方式，並增加選擇數量、糖度、冰塊</li>
+        <li>按確認可以增加至購物車</li>
+        <li>購物車介面</li>
+      </ul>
+    </li>
+    <li>資料庫
+      <ul>
+        <li>飲品資料 INSERT INTO drink (name, price, id, photo) VALUES ('紅茶', 30, 1, '1.jpg');</li>
+        <li>管理帳號密碼 INSERT INTO user (account, password, name, address, phone) VALUES ('0000', '0000', 'jack',
+          '高雄市XXXXXXXXXX' , 0900000000);</li>
+        <li>管理訂單 INSERT INTO `order`(`id`, `drink_id`, `ice`, `sugair`) VALUES ('0','0','去','微')</li>
+      </ul>
+    </li>
+  </ul>
+</body>
+
+</html>

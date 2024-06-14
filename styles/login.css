@@ -1,0 +1,299 @@
+.login-window {
+    padding: 60px 0px 90px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #04AA6D;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    margin: 90px 15px 120px 15px;
+    background: rgba(128, 128, 128, 0.3);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 95dvw;
+    max-width: 120dvh;
+    min-width: 600px;
+    margin: 120px auto;
+  }
+  
+  
+  
+  
+  .login-form h1 {
+    text-align: center;
+    color: white;
+    font-size: 50px;
+  }
+  
+  .login-form p {
+    font-size: 30px;
+    text-align: center;
+    color: white;
+  }
+  
+  textarea:focus,
+  input:focus {
+    outline: none;
+  }
+  
+  ::placeholder {
+    color: whitesmoke;
+  }
+  
+  
+  .account {
+    margin: 20px auto;
+    width: 450px;
+    height: 60px;
+  }
+  
+  .account input {
+    font-size: 20px;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    padding-left: 24px;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), rgba(208, 208, 208, 0.5);
+    background-blend-mode: luminosity, color-burn;
+    box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3), inset 0px -0.5px 1px rgba(255, 255, 255, 0.25), inset 1px 1.5px 4px rgba(0, 0, 0, 0.08), inset 1px 1.5px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  .account input:hover {
+    padding-left: 32px;
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  .account input:focus {
+    padding-left: 32px;
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  .password {
+    margin: 20px auto;
+    width: 450px;
+    height: 60px;
+  }
+  
+  .password input {
+    font-size: 20px;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    padding-left: 24px;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), rgba(208, 208, 208, 0.5);
+    background-blend-mode: luminosity, color-burn;
+    box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3), inset 0px -0.5px 1px rgba(255, 255, 255, 0.25), inset 1px 1.5px 4px rgba(0, 0, 0, 0.08), inset 1px 1.5px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: white;
+    transition: 0.3s;
+  }
+  
+  .password input:hover {
+    padding-left: 32px;
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  .password input:focus {
+    padding-left: 32px;
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  
+  .btn-login {
+    margin: 20px auto;
+    width: 450px;
+    height: 60px;
+  }
+  
+  .btn-login button {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 18px;
+  
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(244, 160, 2, 0.3);
+    background-blend-mode: luminosity;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  
+  .btn-login button:hover {
+    background: rgba(244, 160, 2, 1);
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  
+  .btn-register {
+    margin: 20px auto;
+    width: 450px;
+    height: 60px;
+  }
+  
+  
+  .btn-register button {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(74, 110, 250);
+    color: white;
+    font-size: 18px;
+  
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(74, 110, 250, 0.3);
+    background-blend-mode: luminosity;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  
+  .btn-register button:hover {
+    background: rgba(74, 110, 250, 1);
+    scale: 1.05;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  
+  
+  /*home的*/
+  * {
+    box-sizing: border-box;
+  }
+  
+  /*滾動條(右邊的那個滾輪)的部分*/
+  /*我直接抄chatGPT的*/
+  ::-webkit-scrollbar {
+    width: 12px;
+    /* 滾動條寬度*/
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #686868;
+    ;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #424242;
+  }
+  
+  * {
+    scrollbar-color: #545454 #2d2d2d;
+    /*滾輪的背景顏色 與滾輪顏色*/
+  }
+  
+  
+  /*加了這個就可以用到100% 好像跟margin有關*/
+  
+  body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-image: url(../images/shop_ps過_羽化.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .top-nav {
+    display: flex;
+    height: 75px;
+    width: 100dvw;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    top: 0px;
+    z-index: 5;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(128, 128, 128, 0.3);
+    background-blend-mode: luminosity;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0px 30px;
+  }
+  
+  .top-nav a {
+    color: white;
+    text-align: center;
+    padding: 1dvh 2dvw;
+    /*上下 左右*/
+    text-decoration: none;
+    font-size: 14pt;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  
+  .top-nav a:hover {
+    color: black;
+  
+    background: linear-gradient(0deg, rgba(208, 208, 208, 0.5), rgba(208, 208, 208, 0.5)),
+      rgba(0, 0, 0, 0.1);
+    background-blend-mode: color-burn,
+      luminosity;
+  
+    box-shadow: inset 0px -0.5px 1px rgba(255, 255, 255, 0.3),
+      inset 0px -0.5px 1px rgba(255, 255, 255, 0.25),
+      inset 0px 1.5px 4px rgba(0, 0, 0, 0.08),
+      inset 0px 1.5px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+  
+    scale: 1.1;
+    transition: 0.5s;
+  }
+  
+  .top-nav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  .message {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    display: none;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .message.success {
+    display: block;
+    color: #fff;
+    background-color: #28a745; /* 綠色 */
+  }
+  
+  .message.error {
+    display: block;
+    color: #fff;
+    background-color: #dc3545; /* 紅色 */
+  }
