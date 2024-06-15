@@ -693,6 +693,10 @@ video {
   width: 100%;
 }
 
+.w-32 {
+  width: 8rem;
+}
+
 .resize {
   resize: both;
 }

@@ -44,15 +44,25 @@ function closeModal() {
 
 function addToSelectedDrinks() {
     var name = $('#modalName').text();
-    var price = $('#modalPrice').text();
-    var quantity = $('#drinkQuantity').val();
+    var price = parseFloat($('#modalPrice').text().substring(1));
+    var quantity = parseInt($('#drinkQuantity').val());
+    var sugar = $('#drinkSugar').val();
+    var ice = $('#drinkIce').val();
+    var totalPrice = price * quantity;
 
     $('#selectedDrinksList').append(
         '<li class="py-2 flex justify-between">' +
-        '<span>' + name + ' x ' + quantity + '</span>' +
-        '<span>' + price + '</span>' +
+        '<span>' + name + ' x ' + quantity + ' (' + sugar + '，' + ice + ')</span>' +
+        '<span>$' + totalPrice.toFixed(2) + '</span>' +
         '</li>'
     );
 
+    updateTotalAmount(totalPrice);
     closeModal();
+}
+
+function updateTotalAmount(amount) {
+    var currentTotal = parseFloat($('#totalAmount').text().substring(4)) || 0;
+    var newTotal = currentTotal + amount;
+    $('#totalAmount').text('總金額: $' + newTotal.toFixed(2));
 }

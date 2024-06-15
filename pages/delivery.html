@@ -26,11 +26,12 @@
       </div>
       <div class="w-full lg:w-1/3 mt-8 lg:mt-0">
         <!-- 已選擇飲料 -->
-        <div id="selectedDrinksContainer" class="bg-white p-4 rounded shadow-md ml-2 mb-6 overflow-auto" style="max-height: 40vh; min-height: 20vh;">
+        <div id="selectedDrinksContainer" class="bg-white p-4 rounded shadow-md ml-2 mb-6 overflow-auto" style="max-height: 30vh; min-height: 20vh;">
           <h2 class="text-xl font-bold mb-4 text-gray-700">已選擇飲料</h2>
           <ul id="selectedDrinksList" class="divide-y divide-gray-200">
             <!-- AJAX 生成已選擇飲料項目 -->
           </ul>
+          <div id="totalAmount" class="text-right font-bold mt-4">總金額: $0</div>
         </div>
         <!-- 使用者基本資料 -->
         <div class="bg-white p-6 rounded shadow-md ml-2">
@@ -67,12 +68,29 @@
           <label for="drinkQuantity">選擇數量:</label>
           <input type="number" id="drinkQuantity" name="quantity" min="1" value="1" class="border border-gray-300 p-2 rounded w-16">
         </div>
+        <div>
+          <label for="drinkSugar">糖度:</label>
+          <select id="drinkSugar" name="sugar" class="border border-gray-300 p-2 rounded w-32">
+            <option value="正常糖">正常糖</option>
+            <option value="少糖">少糖</option>
+            <option value="半糖">半糖</option>
+            <option value="微糖">微糖</option>
+            <option value="無糖">無糖</option>
+          </select>
+        </div>
+        <div>
+          <label for="drinkIce">冰塊:</label>
+          <select id="drinkIce" name="ice" class="border border-gray-300 p-2 rounded w-32">
+            <option value="正常冰">正常冰</option>
+            <option value="少冰">少冰</option>
+            <option value="微冰">微冰</option>
+            <option value="去冰">去冰</option>
+            <option value="常溫">常溫</option>
+            <option value="熱飲">熱飲</option>
+          </select>
+        </div>
         <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4" onclick="addToSelectedDrinks()">加入已選擇飲料</button>
       </div>
     </div>
-    <style>
-
-      
-    </style>
   </body>
 </html>
