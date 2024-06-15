@@ -38,4 +38,5 @@ if ($result->num_rows > 0) {
     echo "暫無飲品供應";
 }
 $conn->close();
+exit;
 ?>
