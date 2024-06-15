@@ -7,7 +7,7 @@ $(document).ready(function () {
             if (response.success) {
                 response.drinks.forEach(function (drink) {
                     $('#drinksContainer .grid').append(
-                        '<div class="gallery_d"  style=" height: 60%;"onclick="openModal(\'' + drink.image + '\', \'' + drink.name + '\', \'' + drink.price + '\', \'' + drink.description + '\')">' +
+                        '<div class="gallery_d" style="height: 60%;" onclick="openModal(\'' + drink.image + '\', \'' + drink.name + '\', \'' + drink.price + '\', \'' + drink.description + '\')">' +
                         '<img src="../' + drink.image + '" alt="飲料圖片" class="w-full h-auto object-cover rounded-lg">' +
                         '<div class="desc p-2 text-center text-white">' + drink.name + '</div>' +
                         '</div>'
@@ -50,19 +50,24 @@ function addToSelectedDrinks() {
     var ice = $('#drinkIce').val();
     var totalPrice = price * quantity;
 
-    $('#selectedDrinksList').append(
-        '<li class="py-2 flex justify-between">' +
+    var listItem = $('<li class="py-2 flex justify-between">' +
         '<span>' + name + ' x ' + quantity + ' (' + sugar + '，' + ice + ')</span>' +
         '<span>$' + totalPrice.toFixed(2) + '</span>' +
-        '</li>'
-    );
+        '<button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 ml-4" onclick="removeDrink(this, ' + totalPrice.toFixed(2) + ')">刪除</button>' +
+        '</li>');
 
+    $('#selectedDrinksList').append(listItem);
     updateTotalAmount(totalPrice);
     closeModal();
 }
 
+function removeDrink(button, price) {
+    $(button).closest('li').remove();
+    updateTotalAmount(-parseFloat(price));
+}
+
 function updateTotalAmount(amount) {
-    var currentTotal = parseFloat($('#totalAmount').text().substring(4)) || 0;
+    var currentTotal = parseFloat($('#totalAmount').text().replace('總金額: $', '')) || 0;
     var newTotal = currentTotal + amount;
     $('#totalAmount').text('總金額: $' + newTotal.toFixed(2));
 }
