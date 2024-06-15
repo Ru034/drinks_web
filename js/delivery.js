@@ -71,3 +71,57 @@ function updateTotalAmount(amount) {
     var newTotal = currentTotal + amount;
     $('#totalAmount').text('總金額: $' + newTotal.toFixed(2));
 }
+
+function submitOrder() {
+    var name = $('#name').val();
+    var phone = $('#phone').val();
+    var address = $('#address').val();
+    var selectedDrinks = [];
+
+    $('#selectedDrinksList li').each(function () {
+        var drinkText = $(this).find('span:first').text();
+        var drinkDetails = drinkText.split(' x ');
+        var drinkName = drinkDetails[0];
+        var quantityDetails = drinkDetails[1].split(' (');
+        var quantity = quantityDetails[0];
+        var options = quantityDetails[1].replace(')', '').split('，');
+        var sugar = options[0];
+        var ice = options[1];
+
+        selectedDrinks.push({
+            name: drinkName,
+            quantity: quantity,
+            sugar: sugar,
+            ice: ice
+        });
+    });
+
+    var orderData = {
+        name: name,
+        phone: phone,
+        address: address,
+        drinks: selectedDrinks,
+        totalAmount: parseFloat($('#totalAmount').text().replace('總金額: $', ''))
+    };
+
+    $.ajax({
+        url: '../php/submitOrder.php',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(orderData),
+        success: function (response) {
+            if (response.success) {
+                alert('訂單提交成功！');
+                // 清空表單和已選擇的飲料
+                $('#orderForm')[0].reset();
+                $('#selectedDrinksList').empty();
+                $('#totalAmount').text('總金額: $0');
+            } else {
+                alert('訂單提交失敗：' + response.message);
+            }
+        },
+        error: function () {
+            alert('訂單提交失敗，請重試。');
+        }
+    });
+}
