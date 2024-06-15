@@ -22,7 +22,7 @@ $(document).ready(function () {
 
                     $('#message').text('登入成功，正在跳轉...').removeClass('error').addClass('success');
                     setTimeout(function () {
-                        window.location.href = 'home.html';
+                        window.location.href = '../home.html';
                     }, 2000);
                 } else {
                     $('#message').text(data.message).removeClass('success').addClass('error');
