@@ -1,40 +1,116 @@
-.login-window {
-  padding: 10px 0px 15px 0px; 
+
+* {
+  box-sizing: border-box;
+}
+  
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0.9);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-image: url(../images/shop_ps過_羽化.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* 浮動視窗的樣式 */
+.drift {
+  display: none;
+  position: fixed;
+  z-index: 1000; /* 層級高一點確保在最上層 */
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* 通常用黑色半透明做遮罩 */
+  transition: all 2.0s; /* 平滑出現效果 */
+}
+
+.drift-content {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #04AA6D;
-  text-align: center;
   flex-direction: column;
-  border-radius: 20px;
-  margin: 20px 10px 30px 10px; 
-  background: rgba(128, 128, 128, 0.3);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 200px; /* Set a fixed width for the login window */
-  height: 50px; /* Set a fixed height for the login window */
-  font-size: 24px; /* Increase the font size for better readability */
-  margin: 30px auto; /* Center the login window horizontally */
+  align-items: center; /* 中心對齊內容 */
+  justify-content: space-around; /* 均勻分配空間 */
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(220, 225, 235, 0.9));
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+              0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: auto; /* 自動調整寬度 */
+  max-width: 600px; /* 最大寬度設定 */
+  animation: slideIn 2.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-.login-form h1 {
-  text-align: center;
-  color: white;
-  font-size: 36px;
+/* 圖片樣式 */
+#modalImage {
+  width: 60%; /* 調整圖寬片度 */
+  border-radius: 10px; /* 圓角效果 */
+  margin-bottom: 20px; /* 與下方內容的間距 */
 }
 
-.login-form p {
-  font-size: 18px;
-  text-align: center;
-  color: white;
+/* 文字內容樣式 */
+#modalName, #modalPrice, #modalDescription {
+  width: 100%;
+  text-align: center; /* 文字中心對齊 */
+  margin: 10px 0; /* 增加上下間距 */
+  font-family: 'Arial', sans-serif; /* 使用無襯線字體 */
+}
+
+#modalName {
+  font-size: 24px; /* 標題字體大小 */
+  font-weight: bold; /* 加粗 */
+}
+
+#modalPrice {
+  font-size: 20px;
+  color: #338a36; /* 價格顏色 */
+}
+
+#modalDescription {
+  font-size: 16px; /* 描述文字大小 */
+}
+
+/* 平滑滑入動畫 */
+@keyframes slideIn {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* 響應式設計：在小屏幕裝置上適應 */
+@media screen and (max-width: 768px) {
+  .drift-content {
+    width: 80%; /* 在小屏幕上寬度較大 */
+  }
+}
+/* 到這 */
+
+
+.responsive {
+  padding: 12px;
+  float: left;
+  width: 25%;
+}
+
+.introduce {
+  padding: 120px 30px;
+  max-width: 150dvh; /*??*/
+  margin: auto;
 }
 
 
 
 
-/*home的*/
+/* ----------------home的---------------------- */
 * {
   box-sizing: border-box;
 }
@@ -57,7 +133,7 @@
 
 * {
   scrollbar-color: #545454 #2d2d2d;
-  /*滾輪的背景顏色 與滾輪顏色*/
+  /* 滚动条拖动手柄和轨道的颜色 */
 }
 
 
@@ -65,14 +141,8 @@
 
 body {
   margin: 0px;
-  padding: 0px;
   background-color: rgba(0, 0, 0, 0.9);
-  color: white;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-image: url(../images/shop_ps過_羽化.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .top-nav {
@@ -127,53 +197,73 @@ body {
   background-color: #04AA6D;
   color: white;
 }
-.drinks-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+
+/*drink有articlea嗎?*/
+.article {
+  margin: auto;
   padding: 20px;
-}
-
-.drink-item {
-  border: 1px solid #ddd;
-  padding: 20px;
-  margin: 10px;
-  width: 200px;
-  text-align: center;
-}
-
-.drink-item img {
-  width: 20px;
-  height: 20px;
-}
-
-.drink-item h2 {
   font-size: 20px;
+  line-height: 2;
+  /* 設置行高為文字大小的2倍 */
+  text-align: center;
+  background-color: black;
+  color: white;
+  background-image: url("../images/free_background_5.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 150dvh;
+  /*filter: brightness(20%);*/
+  /*亮度調暗一點 讓焦點著重於文字*/
 }
 
-.drink-item p {
-  margin: 5px 0;
+
+/*以下是投影片的東東*/
+.slide-show-container {
+  position: relative;
+  width: 100%;
+  max-width: 150dvh;
+  margin: auto;
+  overflow: hidden;
 }
 
-.drink-item form {
-  margin-top: 10px;
+.slide-show img {
+  height: 100%;
+  width: 100%;
+  padding-top: 75px;
 }
-.drink-box {
-  border: 1px solid #ccc;
-  padding: 10px;
+
+@keyframes fade-effect {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fade {
+  animation: fade-effect 5s ease-in-out forwards;
+}
+
+
+/* 最底下 */
+.footer {
+  margin-top: 0px;
   margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
 }
 
-.drink-item {
-  /* 如果有需要，可以為每個商品單獨定義樣式 */
+.icon {
+  width: 100px;
+  width: 100px
 }
 
-.drink-item form {
-  margin-top: 10px;
-}
 
-fieldset {
-  margin-bottom: 10px;
-}
 
 

@@ -147,7 +147,18 @@ div.desc {
 
 
 
-
+  
+  body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: rgb(0, 0, 0);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background-image: url(../images/shop_ps過_羽化.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 /* ----------------home的---------------------- */
 * {
   box-sizing: border-box;

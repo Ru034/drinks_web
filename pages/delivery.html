@@ -1,141 +1,78 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <link href="../styles/output.css" rel="stylesheet" />
+    <link href="../styles/delivery.css" rel="stylesheet">
+    <title>外送</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="top-nav">
+      <a href="login.html">
+        <img src="../images/login.png" alt="登入圖示" style="width:50px; height:50px;">
+      </a>
+      <a href="../home.html">首頁</a>
+      <a href="most_new.html">最新資訊</a>
+      <a href="drinks.html">飲品介紹</a>
+      <a href="delivery.html">外送</a>
+    </div>
+    <div class="container mx-auto mt-40 flex flex-wrap">
+      <!-- 飲料選擇畫廊 -->
+      <div id="drinksContainer" class="w-full lg:w-2/3 p-4 shadow-lg rounded-lg overflow-auto" style="max-height: 80vh;">
+        <div class="grid grid-cols-3 gap-4">
+          <!-- AJAX 生成飲料項目 -->
+        </div>
+      </div>
+      <div class="w-full lg:w-1/3 mt-8 lg:mt-0">
+        <!-- 已選擇飲料 -->
+        <div id="selectedDrinksContainer" class="bg-white p-4 rounded shadow-md ml-2 mb-6 overflow-auto" style="max-height: 40vh; min-height: 20vh;">
+          <h2 class="text-xl font-bold mb-4 text-gray-700">已選擇飲料</h2>
+          <ul id="selectedDrinksList" class="divide-y divide-gray-200">
+            <!-- AJAX 生成已選擇飲料項目 -->
+          </ul>
+        </div>
+        <!-- 使用者基本資料 -->
+        <div class="bg-white p-6 rounded shadow-md ml-2">
+          <h2 class="text-2xl font-bold mb-4 text-gray-700">填寫基本資料</h2>
+          <form>
+            <div class="mb-4">
+              <label for="name" class="block text-gray-700">姓名</label>
+              <input type="text" id="name" name="name" class="mt-1 p-2 w-full border border-gray-300 rounded" />
+            </div>
+            <div class="mb-4">
+              <label for="phone" class="block text-gray-700">電話</label>
+              <input type="tel" id="phone" name="phone" class="mt-1 p-2 w-full border border-gray-300 rounded" />
+            </div>
+            <div class="mb-4">
+              <label for="address" class="block text-gray-700">地址</label>
+              <input type="text" id="address" name="address" class="mt-1 p-2 w-full border border-gray-300 rounded" />
+            </div>
+            <div class="text-right">
+              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">送出訂單</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../js/delivery.js"></script>
 
-<head>
-  <meta charset="utf-8" />
-  <link href="../styles/delivery.css" rel="stylesheet">
-  <title>外送</title>
-</head>
+    <div id="drink-drift" class="drift">
+      <div class="drift-content">
+        <img id="modalImage" src="" alt="Drink Image">
+        <div id="modalName" class="text-xl font-bold"></div>
+        <div id="modalPrice" class="text-lg"></div>
+        <div id="modalDescription" class="mb-4"></div>
+        <div>
+          <label for="drinkQuantity">選擇數量:</label>
+          <input type="number" id="drinkQuantity" name="quantity" min="1" value="1" class="border border-gray-300 p-2 rounded w-16">
+        </div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4" onclick="addToSelectedDrinks()">加入已選擇飲料</button>
+      </div>
+    </div>
+    <style>
 
-<body>
-  <!-- 檢查是否有 user cookie，有的話顯示使用者帳號，否則跳轉到登入頁面 -->
-
-  <div class="top-nav">
-    <div class="user-account"></div>
-    <a href="login.html">
-      <img src="../images/login.png" alt="登入圖示" style="width:50px; height:50px;">
-    </a>
-    <a href="../home.html">首頁</a>
-    <a href="most_new.html">最新資訊</a>
-    <a href="drinks.html">飲品介紹</a>
-    <a href="delivery.html">外送</a>
-  </div>
-
-  <div class="login-window"></div>
-  <div class="shopping-cart">
-    <h2>購物車</h2>
-    <ul class="cart-items">
-      <!-- 這裡將動態顯示購物車內容 -->
-    </ul>
-    <button onclick="checkout()">結帳</button>
-  </div>
-  <div class="drinks-list"></div> <!-- 用來顯示飲品列表的容器 -->
-
-  <script>
-    // 檢查用戶是否已登入，並顯示用戶帳號
-    function checkLogin() {
-      var userCookie = getCookie('user');
-      if (userCookie) {
-        document.querySelector('.login-window').textContent = userCookie;
-      } else {
-        // 如果沒有登入，導向登入頁面
-        window.location.href = 'login.html';
-      }
-    }
-
-    // 獲取 cookie 的函數
-    function getCookie(name) {
-      var cookieArr = document.cookie.split(';');
-      for (var i = 0; i < cookieArr.length; i++) {
-        var cookiePair = cookieArr[i].split('=');
-        if (name === cookiePair[0].trim()) {
-          return decodeURIComponent(cookiePair[1]);
-        }
-      }
-      return null;
-    }
-
-    // 當文檔加載完成後執行檢查
-    document.addEventListener('DOMContentLoaded', function () {
-      checkLogin();
-      fetchDrinks();
-    });
-
-    // 獲取飲品列表的函數
-    function fetchDrinks() {
-      fetch('../php/delivery.php')
-        .then(response => response.text())
-        .then(data => {
-          document.querySelector('.drinks-list').innerHTML = data;
-        });
-    }
-
-    let cart = [];
-
-    function updateSweetness(drinkId) {
-      let sweetness = document.getElementById('sweetness_select_' + drinkId).value;
-      document.getElementById('sweetness_' + drinkId).value = sweetness;
-    }
-
-    function updateIce(drinkId) {
-      let ice = document.getElementById('ice_select_' + drinkId).value;
-      document.getElementById('ice_' + drinkId).value = ice;
-    }
-
-    function addToCart(drinkId, drinkName) {
-      let item = {
-        drinkId: drinkId,
-        drinkName: drinkName,
-        sweetness: document.getElementById('sweetness_' + drinkId).value,
-        ice: document.getElementById('ice_' + drinkId).value
-      };
-
-      cart.push(item);
-      updateCartUI();
-    }
-
-    function updateCartUI() {
-      let cartItems = document.querySelector('.cart-items');
-      cartItems.innerHTML = '';
-      cart.forEach(item => {
-        let listItem = document.createElement('li');
-        listItem.textContent = `飲品名: ${item.drinkName}, 甜度: ${item.sweetness}, 冰塊: ${item.ice}`;
-        cartItems.appendChild(listItem);
-      });
-    }
-
-    function checkout() {
-      let userCookie = getCookie('user');
-      if (!userCookie) {
-        alert('請先登入');
-        window.location.href = 'login.html';
-        return;
-      }
-
-      // 將購物車內容送到後端
-      fetch('../php/checkout.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ cart: cart, user: userCookie })
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert('結帳成功');
-            cart = [];
-            updateCartUI();
-          } else {
-            alert('結帳失敗，請稍後再試');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('結帳失敗，請稍後再試');
-        });
-    }
-  </script>
-</body>
-
+      
+    </style>
+  </body>
 </html>
