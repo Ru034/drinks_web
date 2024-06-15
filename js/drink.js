@@ -1,40 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <link href="../styles/drinks.css" rel="stylesheet">
-  <title>飲品介紹</title>
-  <script src="../js/jquery-3.7.1.min.js"></script>
- 
-</head>
-<body>
-
-<div class="top-nav">
-  <a href="login.html">
-    <img src="../images/login.png" alt="登入圖示" style="width:50px; height:50px;">
-  </a>
-  <a href="home.html">首頁</a>
-  <a href="most_new.html">最新資訊</a>
-  <a href="drinks.html">飲品介紹</a>
-  <a href="delivery.html">外送</a>
-</div>
-
-<div class="introduce" id="drinksContainer"></div>
-
-<div id="drink-drift" class="drift">
-  <div class="drift-content">
-    <img id="modalImage" src="" alt="Drink Image" >
-    <div id="modalName"></div>
-    <div id="modalPrice"></div>
-    <div id="modalDescription"></div>
-  </div>
-</div>
-
-<script src="../js/drink.js"></script>
-
-
-<script>
-   function openModal(image, name, price, description) {
+function openModal(image, name, price, description) {
   $("#modalImage").attr("src", "../" + image);
   $("#modalName").text(name);
   $("#modalPrice").text("價格: " + price);
@@ -87,7 +51,3 @@ $(document).ready(function () {
     }
   };
 });
-
-</script>
-</body>
-</html>
