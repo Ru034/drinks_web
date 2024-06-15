@@ -69,6 +69,7 @@
           document.querySelector('.drinks-list').innerHTML = data;
         });
     }
+
     let cart = [];
 
     function updateSweetness(drinkId) {
@@ -81,9 +82,10 @@
       document.getElementById('ice_' + drinkId).value = ice;
     }
 
-    function addToCart(drinkId) {
+    function addToCart(drinkId, drinkName) {
       let item = {
         drinkId: drinkId,
+        drinkName: drinkName,
         sweetness: document.getElementById('sweetness_' + drinkId).value,
         ice: document.getElementById('ice_' + drinkId).value
       };
@@ -103,12 +105,36 @@
     }
 
     function checkout() {
-      // 在這裡處理結帳的相關邏輯，可以將購物車內容送到後端處理
-      console.log('購物車內容:', cart);
-      // 可以使用 fetch 或者其他方式將 cart 資料送到後端 PHP 處理
+      let userCookie = getCookie('user');
+      if (!userCookie) {
+        alert('請先登入');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // 將購物車內容送到後端
+      fetch('../php/checkout.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cart: cart, user: userCookie })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('結帳成功');
+            cart = [];
+            updateCartUI();
+          } else {
+            alert('結帳失敗，請稍後再試');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('結帳失敗，請稍後再試');
+        });
     }
-
-
   </script>
 </body>
 
