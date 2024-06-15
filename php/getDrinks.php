@@ -17,9 +17,11 @@ if ($result->num_rows > 0) {
         $drinks[] = $row;
     }
     echo json_encode(['success' => true, 'drinks' => $drinks]);
+    
 } else {
     echo json_encode(['success' => false, 'message' => '沒有飲品資訊']);
 }
 
 $conn->close();
+exit;
 ?>
