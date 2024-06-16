@@ -59,7 +59,7 @@ CREATE TABLE `orderdetails` (
   PRIMARY KEY (`detail_id`),
   KEY `order_id` (`order_id`),
   CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `orderdetails` (
 
 LOCK TABLES `orderdetails` WRITE;
 /*!40000 ALTER TABLE `orderdetails` DISABLE KEYS */;
-INSERT INTO `orderdetails` (`detail_id`, `order_id`, `drink_name`, `quantity`, `sugar`, `ice`, `price`) VALUES (17,15,'青檸紅玉',1,'正常糖','正常冰',50),(18,15,'青檸青茶',1,'正常糖','正常冰',35);
+INSERT INTO `orderdetails` (`detail_id`, `order_id`, `drink_name`, `quantity`, `sugar`, `ice`, `price`) VALUES (1,1,'青檸青茶',1,'正常糖','正常冰',35),(2,1,'青檸紅玉',1,'正常糖','正常冰',50);
 /*!40000 ALTER TABLE `orderdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,11 +81,11 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `user_id` char(255) NOT NULL,
   `order_date` datetime NOT NULL,
   `total_amount` decimal(10,0) NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +94,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_amount`) VALUES (15,1,'2024-06-16 10:59:42',85);
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_amount`) VALUES (1,'測試2','2024-06-16 21:37:33',85);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`account`, `password`, `name`, `address`, `phone`, `email`) VALUES ('test','$2y$10$3.UuBL6O2Yu7y2mnDNEOBeTwU9f4W.9R1V/JlTgn10hY6Q.kW74vy','測試學生','喜馬拉雅山','097777777','^@^');
+INSERT INTO `user` (`account`, `password`, `name`, `address`, `phone`, `email`) VALUES ('test','$2y$10$zpopdm0bONfkfg69g.l7DuZtzk2ka378S7d7f7ZAaneYsCY4k4QZm','測試學生','喜馬拉雅山5號','0988888888','---^@^--'),('test1','$2y$10$mxqpISmcDYq.RKIC8sTosOPU8G7FQMWY9mDOtbLFp7u8d8C/asXIG','測試2','深海的大鳳梨裡','222222222','!!@!!');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -134,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-16 12:59:25
+-- Dump completed on 2024-06-16 21:38:09

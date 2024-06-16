@@ -164,7 +164,6 @@ function submitOrder() {
             if (response.success) {
                 alert('訂單提交成功！');
                 // 清空表單和已選擇的飲料
-                $('#orderForm')[0].reset();
                 $('#selectedDrinksList').empty();
                 $('#totalAmount').text('總金額: $0');
             } else {

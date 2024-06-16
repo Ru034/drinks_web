@@ -13,8 +13,8 @@ if (isset($data['name'], $data['phone'], $data['address'], $data['drinks'], $dat
 
     // 插入訂單資料
     $stmt = $conn->prepare("INSERT INTO Orders (user_id, order_date, total_amount) VALUES (?, NOW(), ?)");
-    $user_id = 1; // 假設user_id為1，應根據實際情況設置
-    $stmt->bind_param("id", $user_id, $total_amount);
+    $user_id = $name; // 假設user_id為1，應根據實際情況設置
+    $stmt->bind_param("sd", $user_id, $total_amount);
 
     if ($stmt->execute()) {
         $order_id = $stmt->insert_id;
