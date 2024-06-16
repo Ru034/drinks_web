@@ -1,30 +1,57 @@
 $(document).ready(function () {
-    // 檢查登入狀態
+    checkLoginStatus();
+    fetchUserData();
+});
+
+// 檢查登入狀態並更新登入圖示的連結
+function checkLoginStatus() {
     $.ajax({
-        url: '../php/auth_check.php',  // 目標服務器的 URL
+        url: '../php/auth_check.php',  // 檢查登入狀態的 PHP 文件
         type: 'GET',
-        dataType: 'json',  // 期望從服務器返回的數據類型
+        dataType: 'json',
         success: function (data) {
-            if (!data.loggedin) {
-                window.location.href = 'login.html';
-            } else {
-                // 如果已登入，獲取飲品資訊
+            if (data.loggedin) {
+                $('#login-link').attr('href', '/www/pages/welcome.html');
+                $('#login-img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YqWvaYySSmVpmQWVU_giWvPlbr2mkH95cw&s');
                 fetchDrinks();
+            } else {
+                $('#login-link').attr('href', '/www/pages/login.html');
+                $('#login-img').attr('src', '../images/login.png');
+                window.location.href = 'login.html';
             }
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
-            window.location.href = 'login.html';  // 如果 AJAX 請求失敗，重定向到登入頁面
+            $('#login-link').attr('href', 'login.html');  // 如果 AJAX 請求失敗，連結到登入頁面
+            $('#login-img').attr('src', '../images/login.png');
+            window.location.href = 'login.html';
         }
     });
+}
 
-    window.onclick = function (event) {
-        if (event.target == $("#drink-drift")[0]) {
-            closeModal();
+// 獲取用戶資料並自動填入表單
+function fetchUserData() {
+    $.ajax({
+        url: '../php/get_user_data.php',
+        type: 'POST',
+        data: { action: 'fetch' },
+        dataType: 'json',
+        success: function (data) {
+            if (data.success) {
+                $('#name').val(data.user.name);
+                $('#phone').val(data.user.phone);
+                $('#address').val(data.user.address);
+            } else {
+                console.error('Error:', data.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
         }
-    };
-});
+    });
+}
 
+// 獲取飲品資訊的函數
 function fetchDrinks() {
     $.ajax({
         url: '../php/getDrinks.php',
