@@ -1,4 +1,31 @@
 $(document).ready(function () {
+    // 檢查登入狀態
+    $.ajax({
+        url: '../php/auth_check.php',  // 目標服務器的 URL
+        type: 'GET',
+        dataType: 'json',  // 期望從服務器返回的數據類型
+        success: function (data) {
+            if (!data.loggedin) {
+                window.location.href = 'login.html';
+            } else {
+                // 如果已登入，獲取飲品資訊
+                fetchDrinks();
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
+            window.location.href = 'login.html';  // 如果 AJAX 請求失敗，重定向到登入頁面
+        }
+    });
+
+    window.onclick = function (event) {
+        if (event.target == $("#drink-drift")[0]) {
+            closeModal();
+        }
+    };
+});
+
+function fetchDrinks() {
     $.ajax({
         url: '../php/getDrinks.php',
         type: 'GET',
@@ -21,13 +48,7 @@ $(document).ready(function () {
             $('#drinksContainer .grid').append('<p>無法獲取飲品資訊。</p>');
         }
     });
-
-    window.onclick = function (event) {
-        if (event.target == $("#drink-drift")[0]) {
-            closeModal();
-        }
-    }
-});
+}
 
 function openModal(image, name, price, description) {
     $('#modalImage').attr('src', '../' + image);
@@ -71,6 +92,7 @@ function updateTotalAmount(amount) {
     var newTotal = currentTotal + amount;
     $('#totalAmount').text('總金額: $' + newTotal.toFixed(2));
 }
+
 function submitOrder() {
     var name = $('#name').val();
     var phone = $('#phone').val();

@@ -18,8 +18,6 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 if (data.success) {
-                    //document.cookie = 'loggedin=true; path=/;';
-
                     $('#message').text('登入成功，正在跳轉...').removeClass('error').addClass('success');
                     setTimeout(function () {
                         window.location.href = '../home.html';
@@ -38,4 +36,21 @@ $(document).ready(function () {
     $('#register-btn').click(function () {
         window.location.href = 'register.html';
     });
+
+    // 檢查是否已經登入
+    if (getCookie('user_session')) {
+        window.location.href = '../home.html';
+    }
 });
+
+// 獲取 cookie 的函數
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
