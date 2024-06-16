@@ -1,42 +1,45 @@
 <?php
-include '../php/connect.php';
+header('Content-Type: application/json');
+$data = json_decode(file_get_contents('php://input'), true);
 
-$sql = "SELECT name, image, id, price, description FROM drinks";
-$result = $conn->query($sql);
+if (isset($data['name'], $data['phone'], $data['address'], $data['drinks'], $data['total_amount'])) {
+    $name = $data['name'];
+    $phone = $data['phone'];
+    $address = $data['address'];
+    $total_amount = $data['total_amount'];
+    $drinks = $data['drinks'];
 
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<div class='drink-box'>"; // 外部框框開始
-        echo "<div class='drink-item'>";
-        echo "<h2>".$row['name']."</h2>";
-        echo "<p>價格: ".$row['price']."元</p>";
-        echo "<form action='order_drink.php' method='POST'>";
-        echo "<input type='hidden' name='drink_id' value='".$row['id']."'>";
-        echo "<input type='hidden' name='drink_name' value='".$row['name']."'>";
-        echo "<input type='hidden' name='drink_price' value='".$row['price']."'>";
-        echo "<input type='hidden' name='drink_image' value='".$row['image']."'>";
-        echo "<input type='hidden' name='drink_description' value='".$row['description']."'>";
-        echo "<input type='hidden' name='sweetness' id='sweetness_".$row['id']."' value='無糖'>";
-        echo "<input type='hidden' name='ice' id='ice_".$row['id']."' value='去冰'>";
-        echo "甜度: <select name='sweetness_select' id='sweetness_select_".$row['id']."' onchange='updateSweetness(".$row['id'].")'>
-                    <option value='無糖'>無糖</option>
-                    <option value='少糖'>少糖</option>
-                    <option value='半糖'>半糖</option>
-                    <option value='全糖'>全糖</option>
-                </select>";
-        echo "冰塊: <select name='ice_select' id='ice_select_".$row['id']."' onchange='updateIce(".$row['id'].")'>
-                    <option value='去冰'>去冰</option>
-                    <option value='微冰'>微冰</option>
-                    <option value='正常冰'>正常冰</option>
-                </select>";
-        echo "<button type='button' class='add-to-cart-button' onclick='addToCart(".$row['id'].", \"".$row['name']."\")'>加入購物車</button>";
-        echo "</form>";
-        echo "</div>";
-        echo "</div>"; // 外部框框結束
+    include './connect.php';
+
+    // 插入訂單資料
+    $stmt = $conn->prepare("INSERT INTO Orders (user_id, order_date, total_amount) VALUES (?, NOW(), ?)");
+    $user_id = 1; // 假設user_id為1，應根據實際情況設置
+    $stmt->bind_param("id", $user_id, $total_amount);
+
+    if ($stmt->execute()) {
+        $order_id = $stmt->insert_id;
+        $stmt->close();
+
+        // 插入訂單詳細資訊
+        $stmt = $conn->prepare("INSERT INTO OrderDetails (order_id, drink_name, quantity, sugar, ice, price) VALUES (?, ?, ?, ?, ?, ?)");
+
+        foreach ($drinks as $drink) {
+            $stmt->bind_param("isissd", $order_id, $drink['drink_name'], $drink['quantity'], $drink['sugar'], $drink['ice'], $drink['total_price']);
+            $stmt->execute();
+        }
+
+        $stmt->close();
+        echo json_encode(['success' => true]);
+        exit;
+    } else {
+        echo json_encode(['success' => false, 'message' => '訂單插入失敗。']);
+        exit;
     }
+
+    $conn->close();
 } else {
-    echo "暫無飲品供應";
+    echo json_encode(['success' => false, 'message' => '無效的訂單數據。']);
+    exit;
 }
-$conn->close();
-exit;
+
 ?>

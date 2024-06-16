@@ -71,7 +71,6 @@ function updateTotalAmount(amount) {
     var newTotal = currentTotal + amount;
     $('#totalAmount').text('總金額: $' + newTotal.toFixed(2));
 }
-
 function submitOrder() {
     var name = $('#name').val();
     var phone = $('#phone').val();
@@ -87,12 +86,15 @@ function submitOrder() {
         var options = quantityDetails[1].replace(')', '').split('，');
         var sugar = options[0];
         var ice = options[1];
+        var price = $(this).find('span:last').text().substring(1);
 
         selectedDrinks.push({
-            name: drinkName,
+            drink_name: drinkName,
             quantity: quantity,
             sugar: sugar,
-            ice: ice
+            ice: ice,
+            price: parseFloat(price) / parseInt(quantity),
+            total_price: parseFloat(price)
         });
     });
 
@@ -101,11 +103,11 @@ function submitOrder() {
         phone: phone,
         address: address,
         drinks: selectedDrinks,
-        totalAmount: parseFloat($('#totalAmount').text().replace('總金額: $', ''))
+        total_amount: parseFloat($('#totalAmount').text().replace('總金額: $', ''))
     };
 
     $.ajax({
-        url: '../php/submitOrder.php',
+        url: '../php/delivery.php',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(orderData),
@@ -120,7 +122,8 @@ function submitOrder() {
                 alert('訂單提交失敗：' + response.message);
             }
         },
-        error: function () {
+        error: function (xhr, status, error) {
+            console.log('error', xhr, status, error);
             alert('訂單提交失敗，請重試。');
         }
     });
