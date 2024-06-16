@@ -84,6 +84,8 @@ CREATE TABLE `orders` (
   `user_id` char(255) NOT NULL,
   `order_date` datetime NOT NULL,
   `total_amount` decimal(10,0) NOT NULL,
+  `address` char(255) NOT NULL,
+  `phone` int(20) NOT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -94,7 +96,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_amount`) VALUES (1,'測試2','2024-06-16 21:37:33',85);
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `total_amount`, `address`, `phone`) VALUES (1,'測試2','2024-06-16 21:37:33',85,'深海的大鳳梨裡',2147483647);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-16 21:38:09
+-- Dump completed on 2024-06-16 22:02:32

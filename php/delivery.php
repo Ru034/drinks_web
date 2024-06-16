@@ -12,9 +12,9 @@ if (isset($data['name'], $data['phone'], $data['address'], $data['drinks'], $dat
     include './connect.php';
 
     // 插入訂單資料
-    $stmt = $conn->prepare("INSERT INTO Orders (user_id, order_date, total_amount) VALUES (?, NOW(), ?)");
-    $user_id = $name; // 假設user_id為1，應根據實際情況設置
-    $stmt->bind_param("sd", $user_id, $total_amount);
+    $stmt = $conn->prepare("INSERT INTO Orders (user_id, order_date, total_amount, address, phone) VALUES (?, NOW(), ?,?,?)");
+    $user_id = $name; 
+    $stmt->bind_param("sdsd", $user_id, $total_amount, $address, $phone);
 
     if ($stmt->execute()) {
         $order_id = $stmt->insert_id;

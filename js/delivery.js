@@ -98,13 +98,32 @@ function addToSelectedDrinks() {
     var ice = $('#drinkIce').val();
     var totalPrice = price * quantity;
 
-    var listItem = $('<li class="py-2 flex justify-between">' +
-        '<span>' + name + ' x ' + quantity + ' (' + sugar + '，' + ice + ')</span>' +
-        '<span>$' + totalPrice.toFixed(2) + '</span>' +
-        '<button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 ml-4" onclick="removeDrink(this, ' + totalPrice.toFixed(2) + ')">刪除</button>' +
-        '</li>');
+    var existingDrink = $('#selectedDrinksList li').filter(function () {
+        var drinkText = $(this).find('span:first').text();
+        var drinkDetails = drinkText.split(' x ');
+        var drinkName = drinkDetails[0];
+        var quantityDetails = drinkDetails[1].split(' (');
+        var options = quantityDetails[1].replace(')', '').split('，');
+        var existingSugar = options[0];
+        var existingIce = options[1];
+        return drinkName === name && existingSugar === sugar && existingIce === ice;
+    });
 
-    $('#selectedDrinksList').append(listItem);
+    if (existingDrink.length > 0) {
+        var currentQuantity = parseInt(existingDrink.find('span:first').text().split(' x ')[1]);
+        var newQuantity = currentQuantity + quantity;
+        var newTotalPrice = price * newQuantity;
+        existingDrink.find('span:first').text(name + ' x ' + newQuantity + ' (' + sugar + '，' + ice + ')');
+        existingDrink.find('span:last').text('$' + newTotalPrice.toFixed(2));
+    } else {
+        var listItem = $('<li class="py-2 flex justify-between">' +
+            '<span>' + name + ' x ' + quantity + ' (' + sugar + '，' + ice + ')</span>' +
+            '<span>$' + totalPrice.toFixed(2) + '</span>' +
+            '<button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 ml-4" onclick="removeDrink(this, ' + totalPrice.toFixed(2) + ')">刪除</button>' +
+            '</li>');
+        $('#selectedDrinksList').append(listItem);
+    }
+
     updateTotalAmount(totalPrice);
     closeModal();
 }
