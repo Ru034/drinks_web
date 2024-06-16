@@ -16,6 +16,7 @@
    - 帳號預設:ru
 
    - 密碼:0000
+   若要使用自己的帳號，請在`php\connect.php`修改
 
 3. 新增資料庫 : `bevebeverage`
 
