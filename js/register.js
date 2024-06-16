@@ -13,7 +13,7 @@ $(document).ready(function () {
                 } else {
                     // 註冊成功的處理
                     $('.login-window').addClass('success');
-                    $('.login-form').html('<h1>註冊成功，等待跳轉頁面!</h1>');
+                    $('.login-form').html('<h1>註冊成功，請再次登入!</h1>');
                     // 可以選擇重定向到登錄頁或其他操作
                     console.log('註冊成功');
                     setTimeout(() => {

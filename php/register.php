@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $address = $_POST['address'];
     $phone = $_POST['phone'];
+    $email = $_POST['email'];
     $account = $_POST['account'];
     $password = $_POST['password'];
     $repassword = $_POST['repassword'];
@@ -29,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // // 哈希密碼
-    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // 插入數據庫
-    $stmt = $conn->prepare("INSERT INTO user (account, password, name, address, phone) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $account, $password, $name, $address, $phone);
+    $stmt = $conn->prepare("INSERT INTO user (account, password, name, address, phone,email) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $account, $hashed_password, $name, $address, $phone, $email);
 
     if ($stmt->execute()) {
         echo json_encode(['error' => false,'message' => '註冊成功']);

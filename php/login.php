@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($db_account, $db_password);
         $stmt->fetch();
-        if ($db_password === $password) {
+        if (password_verify($password, $db_password)) {
             $_SESSION['user'] = $account;  // 將使用者資訊存入會話
             setcookie("user_session", session_id(), time() + (86400 * 30), "/");  // 將會話ID存入Cookie，有效期30天
             echo json_encode(['success' => true, 'account' => $db_account]);
