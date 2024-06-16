@@ -11,17 +11,16 @@ $(document).ready(function () {
             url: '../php/login.php',  // 目標服務器的 URL
             type: 'POST',
             data: {
-                'account': account.toString(),
-                'password': password.toString()
+                'account': account,
+                'password': password
             },
             dataType: 'json',  // 期望從服務器返回的數據類型
             success: function (data) {
-                console.log(data);
                 if (data.success) {
                     $('#message').text('登入成功，正在跳轉...').removeClass('error').addClass('success');
                     setTimeout(function () {
                         window.location.href = '../home.html';
-                    }, 2000);
+                    }, 1000);
                 } else {
                     $('#message').text(data.message).removeClass('success').addClass('error');
                 }
@@ -38,19 +37,17 @@ $(document).ready(function () {
     });
 
     // 檢查是否已經登入
-    if (getCookie('user_session')) {
-        window.location.href = '../home.html';
-    }
+    $.ajax({
+        url: '../php/auth_check.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if (data.loggedin) {
+                window.location.href = '../home.html';
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error:', error);
+        }
+    });
 });
-
-// 獲取 cookie 的函數
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}

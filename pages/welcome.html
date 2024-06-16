@@ -1,20 +1,19 @@
 <!doctype html>
-<html>
+<html lang="zh-TW">
 
 <head>
   <meta charset="utf-8" />
   <link href="../styles/welcome.css" rel="stylesheet">
   <link href="../styles/output.css" rel="stylesheet">
   <script src="../js/jquery-3.7.1.min.js"></script>
-  <script src="../js/checkout.js"></script>
-  <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+  <script src="../js/auth_check.js"></script>
   <title>外送</title>
 </head>
 
 <body>
   <div class="top-nav">
     <a id="login-link" href="login.html">
-      <img src="../images/login.png" alt="登入圖示" style="width:50px; height:50px;">
+      <img id="login-img"  alt="登入圖示" style="width:50px; height:50px;">
     </a>
     <a href="../home.html">首頁</a>
     <a href="most_new.html">最新資訊</a>
@@ -26,63 +25,47 @@
     <div class="login-form">
       <h1>歡迎！</h1>
       <div class="flex flex-col items-center pb-10 mt-5">
-        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YqWvaYySSmVpmQWVU_giWvPlbr2mkH95cw&s" alt="Bonnie image"/>
-        <h5 class="mb-1 text-xl font-medium text-white dark:text-white">Bonnie Green</h5>
-
-    </div>
-      <!-- 使用 form 標籤來包含輸入元素 -->
-      <form class="max-w-md mx-auto">
-        <h3 class = "relative mb-5">個人資料</h3>  
+        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YqWvaYySSmVpmQWVU_giWvPlbr2mkH95cw&s" alt="User image" />
+        <h5 class="mb-1 text-xl font-medium text-white dark:text-white" id="user-name">User Name</h5>
+      </div>
+      <form id="update-form" class="max-w-md mx-auto">
+        <h3 class="relative mb-5">個人資料</h3>
         <div class="relative z-0 w-full mb-5 group">
-            <input type="email" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
-            <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
-        </div>
-       
-        <div class="grid md:grid-cols-2 md:gap-6">
-          <div class="relative z-0 w-full mb-5 group">
-              <input type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
-              <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
-          </div>
-          <div class="relative z-0 w-full mb-5 group">
-              <input type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
-              <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
-          </div>
-        </div>
-        <div class="grid md:grid-cols-1 md:gap-6">
-          <div class="relative z-0 w-full mb-5 group">
-              <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
-              <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">電話號碼</label>
-          </div>
-          
+          <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
+          <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
         </div>
         <div class="relative z-0 w-full mb-5 group">
-          <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
-          <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">住址</label>
-      </div>
-      <h3 class = "relative mt-10 mb-5">驗證</h3>  
-        <div class="relative z-0 w-full  mb-5 group">
-          <input type="password" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-pink-200 peer" placeholder=" " required />
-          <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-pink-200 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">密碼</label>
-      </div>
-      <div class="relative z-0 w-full mb-5 group">
-          <input type="password" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-pink-200 peer" placeholder=" " required />
-          <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-pink-200 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">重複輸入密碼</label>
-      </div>
-        
+          <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
+          <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">姓名</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" id="phone" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
+          <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">電話號碼</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="text" name="address" id="address" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-yellow-100 peer" placeholder=" " required />
+          <label for="address" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-yellow-100 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">住址</label>
+        </div>
+        <h3 class="relative mt-10 mb-5">驗證</h3>
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="password" name="password" id="password" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-pink-200 peer" placeholder=" " required />
+          <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-pink-200 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">密碼</label>
+        </div>
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="password" name="repeat_password" id="repeat_password" class="block py-2.5 px-0 w-full text-sm text-gray-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-pink-200 peer" placeholder=" " required />
+          <label for="repeat_password" class="peer-focus:font-medium absolute text-sm text-gray-400 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-pink-200 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">重複輸入密碼</label>
+        </div>
         <div class="btn-update">
           <button type="submit" id="update-btn">更新</button>
         </div>
         <div id="message" class="message"></div>
-
       </form>
       <div class="btn-logout">
-        <button  id="logout-btn">登出</button>
+        <button id="logout-btn">登出</button>
       </div>
-      
     </div>
   </div>
   <script src="../js/welcome.js"></script>
-
-
-
 </body>
+
+</html>

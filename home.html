@@ -11,24 +11,33 @@
     });
     
     // 檢查登入狀態並更新登入圖示的連結
-    function checkLoginStatus() {
-        $.ajax({
-            url: './php/auth_check.php',  // 檢查登入狀態的 PHP 文件
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                if (data.loggedin) {
-                    $('#login-link').attr('href', './pages/welcome.html');
-                } else {
-                    $('#login-link').attr('href', './pages/login.html');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-                $('#login-link').attr('href', 'login.html');  // 如果 AJAX 請求失敗，連結到登入頁面
-            }
-        });
-    }
+    $(document).ready(function () {
+      checkLoginStatus();
+  });
+  
+  // 檢查登入狀態並更新登入圖示的連結
+  function checkLoginStatus() {
+      $.ajax({
+          url: './php/auth_check.php',  // 檢查登入狀態的 PHP 文件
+          type: 'GET',
+          dataType: 'json',
+          success: function (data) {
+              if (data.loggedin) {
+                  $('#login-link').attr('href', '/www/pages/welcome.html');
+                  $('#login-img').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YqWvaYySSmVpmQWVU_giWvPlbr2mkH95cw&s');
+              } else {
+                  $('#login-link').attr('href', '/www/pages/login.html');
+                  $('#login-img').attr('src', './images/login.png');
+              }
+          },
+          error: function (xhr, status, error) {
+              console.error('Error:', error);
+              $('#login-link').attr('href', 'login.html');  // 如果 AJAX 請求失敗，連結到登入頁面
+              $('#login-img').attr('src', './images/login.png');
+          }
+      });
+  }
+  
   
     </script>
   </head>
@@ -38,7 +47,7 @@
 
     <div class="top-nav">
       <a id="login-link" href="./pages/login.html">
-        <img src="./images/login.png" alt="登入圖示" style="width:50px; height:50px;">
+        <img id="login-img"  alt="登入圖示" style="width:50px; height:50px;">
       </a>
       <a href="home.html">首頁</a>
       <a href="./pages/most_new.html">最新資訊</a>

@@ -1,10 +1,10 @@
 <?php
-session_start();  // 開啟會話
+session_start();
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require './connect.php';
 
-    header('Content-Type: application/json');
     $account = $_POST['account'];
     $password = $_POST['password'];
 

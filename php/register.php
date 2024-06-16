@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // 插入數據庫
-    $stmt = $conn->prepare("INSERT INTO user (account, password, name, address, phone,email) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO user (account, password, name, address, phone, email) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $account, $hashed_password, $name, $address, $phone, $email);
 
     if ($stmt->execute()) {
