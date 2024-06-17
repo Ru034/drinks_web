@@ -89,6 +89,11 @@ function openModal(image, name, price, description) {
 function closeModal() {
     $('#drink-drift').css('display', 'none');
 }
+window.onclick = function (event) {
+    if (event.target == $("#drink-drift")[0]) {
+        closeModal();
+    }
+}
 
 function addToSelectedDrinks() {
     var name = $('#modalName').text();
