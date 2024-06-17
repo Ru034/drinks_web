@@ -19,7 +19,7 @@
 
    若要使用自己的帳號，請在`php\connect.php`修改
 
-4. 新增資料庫 : `bevebeverage`
+4. 新增資料庫 : `beverage`
 
 5. 匯入資料[beverage_backup.sql](https://github.com/Ru034/drinks_web/blob/main/beverage_backup.sql)
 
